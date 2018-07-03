@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="ccrm_view_quant_assign_analytic_account" model="ir.ui.view">
+            <field name="name">Set Analytic Account</field>
+            <field name="model">ccrm.stock_quant_assign_analytic</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                 <form string="Set Analytic Account">
+                     <group>
+                        <field name="analytic_account_id"/>
+                        <field name="single_quant" invisible="1"/>
+                        <field name="quantity" attrs="{'invisible': [('single_quant', '!=', True)]}" />
+                     </group>
+                     <group>
+                         <field name="quant_ids" nolabel="1" colspan="2" invisible="1">
+                         </field>
+                     </group>
+                     <newline/>
+                     <group colspan="2">
+                         <button name="assign_analytic_account"
+                                 string="Set Analytic Account" type="object"
+                                 class="oe_highlight"/>
+                         <button special="cancel" string="Cancel" class="oe_link"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="ccrm_action_quant_assign_analytic_account" model="ir.actions.act_window">
+            <field name="name">Set Analytic Account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ccrm.stock_quant_assign_analytic</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ccrm_view_quant_assign_analytic_account"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="ccrm_quant_assign_analytic_account">
+            <field name="model_id" ref="model_stock_quant" />
+            <field name="name">Setd Analytic Account</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('ccrm_action_quant_assign_analytic_account'))" />
+            <field name="key">action</field>
+            <field name="model">stock.quant</field>
+        </record>
+
+    </data>
+</openerp>

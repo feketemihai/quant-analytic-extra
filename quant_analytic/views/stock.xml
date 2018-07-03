@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:
+-->
+<openerp>
+  <data>
+
+ <record model="ir.ui.view" id="qa_view_stock_quant_form">
+      <field name="name">stock.quant.form</field>
+      <field name="model">stock.quant</field>
+      <field eval="10" name="priority"/>
+      <field name="inherit_id" ref="stock.view_stock_quant_form"></field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='inventory_value']" position="after">
+	  <field name="analytic_account_id" />
+	</xpath>
+      </field>
+    </record>
+
+
+ <record model="ir.ui.view" id="qa_view_stock_quant_tree">
+      <field name="name">stock.quant.tree</field>
+      <field name="model">stock.quant</field>
+      <field name="inherit_id" ref="stock.view_stock_quant_tree"></field>
+      <field eval="11" name="priority"/>
+      <field name="arch" type="xml">
+	<xpath expr="//tree" position="attributes">
+	  <attribute name="create">1</attribute>
+	</xpath>
+        <xpath expr="//field[@name='product_id']" position="after">
+	  <field name="analytic_account_id"/>
+	</xpath>
+      </field>
+ </record>
+
+ <record id="qa_quant_search_view" model="ir.ui.view">
+      <field name="name">stock.quant.search</field>
+      <field name="model">stock.quant</field>
+      <field name="inherit_id" ref="stock.quant_search_view"/>
+      <field eval="10" name="priority"/>
+      <field name="arch" type="xml">
+	<xpath expr="//filter[@name='productgroup']" position="after">
+	  <filter name="analytic_account" string='Analytic Account' context="{'group_by' : 'analytic_account_id'}"/>
+	</xpath>
+      </field>
+    </record>
+
+      </data>
+</openerp>
