@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+
+        <record id="removal_cc" model="product.removal">
+            <field name="name">Cost Center (CC)</field>
+            <field name="method">cost_center</field>
+        </record>
+
+  </data>
+  </openerp>

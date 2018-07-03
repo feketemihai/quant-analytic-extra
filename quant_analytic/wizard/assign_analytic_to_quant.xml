@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_quant_assign_analytic_account" model="ir.ui.view">
+            <field name="name">Setare Centru de Cost</field>
+            <field name="model">quant_analytic.stock_quant_assign_analytic</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                 <form string="Setare Centru de Cost">
+                     <group>
+                        <field name="analytic_account_id"/>
+                        <field name="single_quant" invisible="1"/>
+                        <field name="quantity" attrs="{'invisible': [('single_quant', '!=', True)]}" />
+                     </group>
+                     <group>
+                         <field name="item_ids" nolabel="1" colspan="2" invisible="1">
+                              <tree string="Cantitati" create="false" editable="bottom">
+                                   <field name="quant_id"/>
+                              </tree>
+                         </field>
+                     </group>
+                     <newline/>
+                     <group colspan="2">
+                         <button name="assign_analytic_account"
+                                 string="Setare Centru de Cost" type="object"
+                                 class="oe_highlight"/>
+                         <button special="cancel" string="Cancel" class="oe_link"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_quant_assign_analytic_account" model="ir.actions.act_window">
+            <field name="name">Setare Centru de Cost</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quant_analytic.stock_quant_assign_analytic</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_quant_assign_analytic_account"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="quant_assign_analytic_account">
+            <field name="model_id" ref="model_stock_quant" />
+            <field name="name">Setare Centru de Cost</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_quant_assign_analytic_account'))" />
+            <field name="key">action</field>
+            <field name="model">stock.quant</field>
+        </record>
+
+    </data>
+</openerp>
